@@ -45,7 +45,7 @@ export default {
             }
         };
     },
-    /methods: {
+    methods: {
         addProduct() {
             // Logic to save the product
             console.log(this.product);
