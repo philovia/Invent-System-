@@ -1,13 +1,13 @@
 <template>
     <div>
-        <h1>Sales</h1>
-    <!-- Add sales management functionalities here -->
+        <h1> User Management</h1>
+        <!-- Add user management functionalities here -->
     </div>
 </template>
 
 <script>
 export default {
-    name: 'Sales'
+    name: 'User Management'
 };
 </script>
 
