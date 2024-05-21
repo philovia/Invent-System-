@@ -1,21 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../views/Home.vue';
-import Dashboard from '../components/Dashboard.vue';
+import HomeView from '../views/HomeView.vue';
+import UserDashboard from '../components/UserDashboard.vue';
 import UserManagement from '../components/UserManagement.vue';
 import ProductDashboard from '../components/ProductDashboard.vue';
-import Sales from '../components/Sales.vue';
-import Invoices from '../components/Invoices.vue';
-import Reports from '../components/Reports.vue';
+import SalesOverview from '../components/SalesOverview.vue';
+import InvoiceList from '../components/InvoiceList.vue';
+import SalesReports from '../components/SalesReports.vue';
 
 const routes = [
     {
         path: '/',
-        name: 'Home',
-        component: Home,
+        name: 'Home View',
+        component: HomeView,
         children: [
             {
                 path: 'dashboard',
-                component: Dashboard
+                component: UserDashboard
             },
             {
                 path: 'users',
@@ -27,15 +27,15 @@ const routes = [
             },
             {
                 path: 'sales',
-                component: Sales
+                component: SalesOverview
             },
             {
                 path: 'invoices',
-                component: Invoices
+                component: InvoiceList
             },
             {
                 path: 'reports',
-                component: Reports
+                component: SalesReports
             },
         ]
     }

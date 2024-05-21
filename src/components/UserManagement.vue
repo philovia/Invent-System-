@@ -1,16 +1,16 @@
 <template>
     <div>
-        <h1> User Management</h1>
-        <!-- Add user management functionalities here -->
+        <h1>User Management</h1>
+        <!-- Add your user management content here -->
     </div>
-</template>
+    </template>
 
-<script>
-export default {
-    name: 'User Management'
-};
-</script>
+    <script>
+    export default {
+    name: 'UserManagement'
+    };
+    </script>
 
-<style>
-/* Add styles here */
-</style>
+    <style scoped>
+  /* Add your styles here */
+    </style>

@@ -1,12 +1,13 @@
 <template>
     <div>
-        <router-view />>
+        <h1>Sales Reports</h1>
+    <!-- Add report generation functionalities here -->
     </div>
 </template>
 
 <script>
 export default {
-    name: 'Home'
+    name: 'SalesReports'
 };
 </script>
 
