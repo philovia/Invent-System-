@@ -1,13 +1,13 @@
 <template>
     <div>
-        <h1>Home</h1>
-        <router-view />>
+        <h1>InvoicesView</h1>
+    <!-- Add invoice management functionalities here -->
     </div>
 </template>
 
 <script>
 export default {
-    name: 'HomeView'
+    name: 'InvoicesView'
 };
 </script>
 

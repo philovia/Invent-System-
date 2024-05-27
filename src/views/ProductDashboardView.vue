@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Product Dashboard</h1>
+        <h1>ProductView</h1>
         <form @submit.prevent="addProduct">
             <div>
                 <label for="name">Product Name:</label>
@@ -32,7 +32,7 @@
 
 <script>
 export default {
-    name: 'ProductDashboard',
+    name: 'ProductView',
     data () {
         return {
             product:{
