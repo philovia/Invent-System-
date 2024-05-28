@@ -3,7 +3,7 @@
         <MainSidebar />
         <TopBar />
         <div class="content">
-        <h2>Dashboard</h2>
+            <h1 class="center">Welcome to Admin Dashboard</h1>
         <div class="card-container">
             <div class="card" v-for="card in cards" :key="card.title">
             <i :class="card.icon"></i>
@@ -45,11 +45,11 @@
     }
 
     .content {
-    margin-left: 250px;
-    padding: 80px 20px 20px 20px;
+    margin-left: 160px;
+    padding: 80px 20px 55px 20px;
     flex-grow: 1;
     background-color: #ecf0f1;
-    min-height: 100vh;
+    min-height: 80vh;
     }
 
     .card-container {

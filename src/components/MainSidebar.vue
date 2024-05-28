@@ -2,47 +2,47 @@
     <nav class="sidebar">
         <div class="logo-container">
         <img src="@/assets/images/logo.png" alt="Logo" class="logo" />
-        <h2>Inventory System</h2>
+
         </div>
         <ul>
-        <li>
-            <router-link to="/dashboard">
+        <li class="nav-item">
+            <router-link to="/dashboard" class="nav-link">
             <i class="fas fa-tachometer-alt"></i>
             <span>Dashboard</span>
             </router-link>
         </li>
-        <li>
-            <router-link to="/users">
+        <li class="nav-item">
+            <router-link to="/users" class="nav-link">
             <i class="fas fa-users"></i>
             <span>Users</span>
             </router-link>
         </li>
-        <li>
-            <router-link to="/products">
+        <li class="nav-item">
+            <router-link to="/products" class="nav-link">
             <i class="fas fa-box-open"></i>
             <span>Products</span>
             </router-link>
         </li>
-        <li>
-            <router-link to="/sales">
+        <li class="nav-item">
+            <router-link to="/sales" class="nav-link">
             <i class="fas fa-chart-line"></i>
             <span>Sales</span>
             </router-link>
         </li>
-        <li>
-            <router-link to="/invoices">
+        <li class="nav-item">
+            <router-link to="/invoices" class="nav-link">
             <i class="fas fa-file-invoice"></i>
             <span>Invoices</span>
             </router-link>
         </li>
-        <li>
-            <router-link to="/reports">
+        <li class="nav-item">
+            <router-link to="/reports" class="nav-link">
             <i class="fas fa-chart-bar"></i>
             <span>Reports</span>
             </router-link>
         </li>
-        <li>
-            <router-link to="/purchases">
+        <li class="nav-item">
+            <router-link to="/purchases" class="nav-link">
             <i class="fas fa-shopping-cart"></i>
             <span>Purchases</span>
             </router-link>
@@ -53,9 +53,9 @@
 
     <style scoped>
     .sidebar {
-    width: 250px;
+    width: 160px;
     height: 100vh;
-    background-color: #2c3e50;
+    background-color: #496a8b;
     position: fixed;
     top: 0;
     left: 0;
@@ -71,7 +71,7 @@
     }
 
     .logo {
-    width: 150px;
+    width: 120px;
     margin-bottom: 10px;
     }
 
@@ -90,7 +90,9 @@
     text-decoration: none;
     display: flex;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 0px   ;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
     }
 
@@ -99,7 +101,9 @@
     }
 
     i {
-    margin-right: 10px;
+    margin-right: 5px;
+    color: #ec6036;
+    size: 0dvh;
     }
     </style>
 

@@ -1,10 +1,25 @@
 <template>
     <div class="login-container">
+        <div class="image-container">
+            <img src="@/assets/images/side-image.png" alt="Side Image" class="side-image" />
+        </div>
         <div class="login-form">
         <img src="@/assets/images/logo.png" alt="Logo" class="logo" />
+        <h5>"One Town, One Product"</h5>
         <h2>LOGIN</h2>
         <input type="email" placeholder="Email Address" />
-        <input type="password" placeholder="Password" />
+        <div class="password-container">
+        <input
+            :type="passwordFieldType"
+            placeholder="Password"
+            v-model="password"
+        />
+        <i
+            :class="passwordFieldIcon"
+            @click="togglePasswordVisibility"
+            class="password-icon"
+        ></i>
+        </div>
         <button @click="login">Log In</button>
         <router-link to="/register">Sign Up</router-link>
         </div>
@@ -14,10 +29,28 @@
     <script>
     export default {
     name: 'LoginView',
+
+    data() {
+    return {
+        password: "",
+        passwordFieldType: "password",
+        passwordFieldIcon: "fas fa-eye",
+    };
+    },
     methods: {
         login() {
         this.$store.dispatch('login');
         this.$router.push('/dashboard');
+        },
+
+        togglePasswordVisibility() {
+        if (this.passwordFieldType === "password") {
+        this.passwordFieldType = "text";
+        this.passwordFieldIcon = "fas fa-eye";
+        } else {
+        this.passwordFieldType = "password";
+        this.passwordFieldIcon = "fas fa-eye-slash";
+        }
         },
     },
     };
@@ -30,6 +63,21 @@
     align-items: center;
     height: 100vh;
     background-color: #eef2f7;
+    width: 87%;
+    }
+
+    .image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .side-image {
+    width: 98%;
+    height: 70vh;
+    max-width: 400px; /* Adjust as necessary */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
     .login-form {
@@ -41,8 +89,12 @@
     }
 
     .logo {
-    width: 80px;
-    margin-bottom: 20px;
+    width: 150px;
+    margin-bottom: 5px;
+    }
+
+    .h4 {
+    margin-top: 2px;
     }
 
     input {
@@ -54,12 +106,28 @@
     border: 1px solid #ccc;
     }
 
-    button {
+    .password-container {
+    position: relative;
     width: 100%;
+    }
+
+
+
+    .password-icon {
+    position: absolute;
+    right: 1px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: rgb(202, 64, 4)
+    }
+
+    button {
+    width: 111%;
     padding: 10px;
     background-color: #1abc9c;
     border: none;
-    color: #fff;
+    color: #ccc;
     border-radius: 4px;
     cursor: pointer;
     }
