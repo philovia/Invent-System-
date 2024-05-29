@@ -125,7 +125,7 @@
     button {
     width: 111%;
     padding: 10px;
-    background-color: #1abc9c;
+    background-color: #f25212;
     border: none;
     color: #ccc;
     border-radius: 4px;
