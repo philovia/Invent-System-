@@ -6,6 +6,10 @@ import store from './store';
 import 'bootstrap/dist/css/bootstrap.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './assets/styles.css';
+// import vuetify from './plugins/vuetify'; // Path to vuetify export
+import 'vuetify/dist/vuetify.min.css';
+import '@mdi/font/css/materialdesignicons.css';
+// import 'chartist/dist/chartist.min.css';
 
 createApp(App).use(router).use(store).mount('#app');
 

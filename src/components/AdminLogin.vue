@@ -11,8 +11,8 @@
         <div class="password-container">
         <input
             :type="passwordFieldType"
-            placeholder="User Code"
-            v-model="password"
+            placeholder="Admin Code"
+            v-model="adminCode"
         />
         <i
             :class="passwordFieldIcon"
@@ -21,21 +21,24 @@
         ></i>
         </div>
         <button @click="navigateToAdminPage">Log In</button>
+        <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
         </div>
     </div>
     </template>
 
     <script>
     // import TopBar from '@/components/TopBar.vue';
+    import axios from 'axios';
 
     export default {
     name: 'LoginView',
-
     data() {
     return {
-        password: "",
-        passwordFieldType: "password",
-        passwordFieldIcon: "fas fa-eye",
+        username: '',
+        adminCode: '',
+        passwordFieldType: 'password',
+        passwordFieldIcon: 'fas fa-eye',
+        errorMessage: ''
     };
     },
 
@@ -43,6 +46,20 @@
     //     TopBar
     // },
     methods: {
+
+        async login() {
+        try {
+        const response = await axios.post('http://localhost:5000/admin/login', {
+            username: this.username,
+            password: this.adminCode,
+        });
+        const { token } = response.data;
+        localStorage.setItem('token', token);
+        this.$router.push('/admin');// Redirect to admin page on successful login
+            } catch (err) {
+        this.errorMessage = 'Invalid username or admin code';
+        }
+    },
         navigateToAdminPage() {
         this.$router.push('/admin');
         },
