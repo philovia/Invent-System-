@@ -31,25 +31,25 @@
       </div>
       <ul>
         <li class="nav-item">
-          <router-link to="/dashboard" class="nav-link" @click="closeDrawer">
+          <router-link to="/dash-board" class="nav-link" @click="selectCategory('dash-board')">
             <i class="fas fa-tachometer-alt"></i>
             <span>Dashboard</span>
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/users" class="nav-link" @click="closeDrawer">
+          <router-link to="/products-view" class="nav-link" @click="selectCategory('users-view')">
             <i class="fas fa-users"></i>
             <span>Users</span>
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/products" class="nav-link" @click="closeDrawer">
+          <router-link to="/products" class="nav-link" @click="selectCategory('products-view')">
             <i class="fas fa-box-open"></i>
             <span>Products</span>
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/sales" class="nav-link" @click="closeDrawer">
+          <router-link to="/sales" class="nav-link" @click="selectCategory('sales')">
             <i class="fas fa-chart-line"></i>
             <span>Sales</span>
           </router-link>
@@ -80,26 +80,8 @@
       <div class="v-content">
         <div class="v-content__wrap">
           <section :id="currentCategory" class="container-fluid">
-            <!-- Row for placing cards or charts -->
-            <div class="row">
-              <div class="col-md-6">
-                <!-- Example card (replace with your content) -->
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Card 1</h5>
-                    <p class="card-text">Example card content.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <!-- Example chart (replace with your content) -->
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Chart 1</h5>
-                    <p class="card-text">Example chart content.</p>
-                  </div>
-                </div>
-              </div>
+            <div class="row" v-if="currentCategory">
+              <component :is="currentCategoryComponent"></component>
             </div>
           </section>
         </div>
@@ -109,6 +91,11 @@
 </template>
 
 <script>
+
+import DashBoard from '@/components/DashBoard.vue';
+import UsersView from '@/components/UsersView.vue';
+import ProductsView from '@/components/ProductsView.vue';
+import SalesView from '@/components/SalesView.vue';
 export default {
   name: 'SidebarTopBar',
   data() {
@@ -116,6 +103,20 @@ export default {
       isDrawerOpen: false,
       currentCategory: null // To store the currently selected category
     };
+  },
+
+  components: {
+    DashBoard,
+    UsersView,
+    ProductsView,
+    SalesView,
+  },
+
+  computed: {
+    currentCategoryComponent() {
+      if (!this.currentCategory) return null;
+      return this.currentCategory.charAt(0).toUpperCase() + this.currentCategory.slice(1);
+    },
   },
   methods: {
     focusSearchInput() {

@@ -9,8 +9,8 @@ import TopBar from '@/components/TopBar.vue';
 // import AdminUserView from '@/views/AdminUserView.vue';
 import AdminLogin from '@/components/AdminLogin.vue';
 // import CashierDashboard from '@/views/CashierDashboard.vue';
-// import AdminDashboard from '@/views/AdminDashboard.vue';
-// import SupplierDashboard from '@/views/SupplierDashboard.vue';
+import DashBoard from '@/components/DashBoard.vue';
+import ProductsView from '@/components/ProductsView.vue';
 // Import the CashierPage component
 
 const routes = [
@@ -23,6 +23,8 @@ const routes = [
                 children: [
                     // { path: '', component: AdminDashboard },
                     { path: '/top-bar', component: TopBar },
+                    { path: '/dash-board', component: DashBoard },
+                    { path: '/products-view', component: ProductsView },
                     {
                         path: '/user-view', component: AdminLogin,
                     beforeEnter: (to, from, next) => {

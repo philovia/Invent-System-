@@ -85,171 +85,177 @@
 };
     </script>
 
-    <style scoped>
+<style scoped>
 /* General Styles */
-    body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
 
-    /* Topbar Styles */
-    .topbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    text-align: center;
-    z-index: 10;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+/* Topbar Styles */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-    .topbar h2 {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    margin: 0;
-    }
+.topbar h2 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 2rem; /* Adjusted for better responsiveness */
+}
 
-    .topbar h3 {
-    /* position: absolute;
-    text-align: left; */
-    margin: 0;
-    }
+.topbar h3 {
+  margin: 0;
+  font-size: 1.5rem; /* Adjusted for better responsiveness */
+}
 
-    .nav-container {
-    /* flex: 1;
-    display: flex;
-    justify-content: right; */
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    }
+.nav-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
 
-    nav {
-    display: flex;
-    align-items: center;
-    }
+nav {
+  display: flex;
+  align-items: center;
+}
 
-    .nav-link {
-    margin: 20px 40px;
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    display: flex;
-    align-items: center;
-    }
+.nav-link {
+  margin: 20px 40px;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
 
-    .nav-link:hover {
-    color: #ffc107; /* Change the color on hover */
-    }
+.nav-link:hover {
+  color: #ffc107; /* Change the color on hover */
+}
 
-    .dropdown {
-    position: relative;
-    display: inline-block;
-    }
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
 
-    .dropdown-toggle::after {
-    /* content: '\5BC'; */
-    display: flex;
-    align-items: center;
-    }
+.dropdown-toggle::after {
+  display: flex;
+  align-items: center;
+}
 
-    .dropdown-menu {
-    display: block;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: rgba(56, 54, 54, 0.53);
-    color: white;
-    min-width: 160px;
-    z-index: 20;
-    border-radius: 4px;
-    box-shadow: 0 8px 16px rgba(83, 81, 81, 0.2);
-    }
+.dropdown-menu {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgba(56, 54, 54, 0.53);
+  color: white;
+  min-width: 160px;
+  z-index: 20;
+  border-radius: 4px;
+  box-shadow: 0 8px 16px rgba(83, 81, 81, 0.2);
+}
 
-    .dropdown-item {
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    color: white;
-    cursor: pointer;
-    }
+.dropdown-item {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  color: white;
+  cursor: pointer;
+}
 
-    .dropdown-item:hover {
-    background-color: rgba(227, 211, 211, 0.425);
-    }
+.dropdown-item:hover {
+  background-color: rgba(227, 211, 211, 0.425);
+}
 
-    /* .dropdown-menu {
-        display: block;
-    } */
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('@/assets/images/side-image.png') no-repeat center center;
+  background-size: cover; /* Ensure the background image covers the entire container */
+  z-index: -1; /* Place the background behind other content */
+}
 
-    .background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('@/assets/images/side-image.png') no-repeat center center;
-    background-size: cover; /* Ensure the background image covers the entire container */
-    z-index: -1; /* Place the background behind other content */
-    }
+/* Container Styles */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  max-width: 600px;
+  background-color: rgba(245, 238, 238, 0.516);
+  border-radius: 8px;
+  margin: 150px auto;
+  box-shadow: 0 2px 10px rgba(228, 165, 93, 0.432);
+  padding: 50px;
+}
 
-    /* Container Styles */
-    .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 80%;
-    max-width: 600px;
-    background-color: rgba(245, 238, 238, 0.516);
-    border-radius: 8px;
-    margin: 150px auto;
-    box-shadow: 0 2px 10px rgba(228, 165, 93, 0.432);
-    padding: 50px;
-    }
+.content {
+  text-align: center;
+  word-wrap: break-word;
+}
 
-
-    .content {
-        text-align: center;
-        word-wrap: break-word;
-    }
-
-  /* Media queries for responsive design */
-    @media screen and (max-width: 768px) {
-    .topbar {
+/* Media queries for responsive design */
+@media screen and (max-width: 768px) {
+  .topbar {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     padding: 10px;
-    }
+  }
 
-    .topbar h2 {
-    margin-bottom: 10px;
-    }
-
-    nav {
-    margin-top: 10px;
-    }
-
-    .container {
-    width: 50%; /* Set width to 50% for smaller screens */
-    }
-
-    }
-
-    @media screen and (max-width: 480px) {
-    .topbar h2 {
+  .topbar h2 {
     font-size: 1.5rem;
-    }
+    position: static;
+    transform: none;
+    margin-bottom: 10px;
+  }
 
-    .container {
-    width: 80%; /* Set width to 80% for even smaller screens */
-    }
-    }
-    </style>
+  .topbar h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .nav-container {
+    justify-content: center;
+  }
+
+  .nav-link {
+    margin: 10px 20px;
+  }
+
+  .container {
+    width: 90%; /* Set width to 90% for smaller screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .topbar h2 {
+    font-size: 1.2rem;
+  }
+
+  .topbar h3 {
+    font-size: 1rem;
+  }
+
+  .container {
+    width: 95%; /* Set width to 95% for even smaller screens */
+  }
+}
+</style>
