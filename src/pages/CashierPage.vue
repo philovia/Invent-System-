@@ -8,7 +8,7 @@
       </button>
       
       <div class="topbar-left">
-        <h2 class="title">Inventory System</h2>
+        <h2 class="title"> Cashier Inventory System</h2>
       </div>
       <div class="topbar-right">
         <div class="search-container">
@@ -31,19 +31,19 @@
       </div>
       <ul>
         <li class="nav-item">
-          <router-link to="/dashboard" class="nav-link" @click="closeDrawer">
+          <router-link to="/orders-view" class="nav-link" @click="selectCategory('orders-view')">
             <i class="fas fa-tachometer-alt"></i>
             <span>Orders</span>
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/users" class="nav-link" @click="closeDrawer">
+          <router-link to="/cashier-products" class="nav-link" @click="selectCategory('cashier-products')">
             <i class="fas fa-users"></i>
             <span>Products</span>
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/products" class="nav-link" @click="closeDrawer">
+          <router-link to="/updates-view" class="nav-link" @click="selectCategory('updates-view')">
             <i class="fas fa-box-open"></i>
             <span>Updates</span>
           </router-link>
@@ -56,26 +56,8 @@
       <div class="v-content">
         <div class="v-content__wrap">
           <section :id="currentCategory" class="container-fluid">
-            <!-- Row for placing cards or charts -->
-            <div class="row">
-              <div class="col-md-6">
-                <!-- Example card (replace with your content) -->
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Card 1</h5>
-                    <p class="card-text">Example card content.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <!-- Example chart (replace with your content) -->
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Chart 1</h5>
-                    <p class="card-text">Example chart content.</p>
-                  </div>
-                </div>
-              </div>
+            <div class="row" v-if="currentCategory">
+              <component :is="currentCategoryComponent"></component>
             </div>
           </section>
         </div>
@@ -85,6 +67,14 @@
 </template>
 
 <script>
+
+import OrdersView from '@/components/OrdersView.vue';
+import CashierProducts from '@/components/CashierProducts.vue';
+import UpdatesView from '@/components/UpdatesView.vue';
+// import SalesView from '@/components/SalesView.vue';
+// import InvoicesView from '@/components/InvoicesView.vue';
+// import ReportsView from '@/components/ReportsView.vue';
+// import PurchasesView from '@/components/PurchasesView.vue';
 export default {
   name: 'SidebarTopBar',
   data() {
@@ -92,6 +82,19 @@ export default {
       isDrawerOpen: false,
       currentCategory: null // To store the currently selected category
     };
+  },
+
+  components: {
+    OrdersView,
+    CashierProducts,
+    UpdatesView,
+  },
+
+  computed: {
+    currentCategoryComponent() {
+      if (!this.currentCategory) return null;
+      return this.currentCategory.charAt(0).toUpperCase() + this.currentCategory.slice(1);
+    },
   },
   methods: {
     focusSearchInput() {
@@ -117,7 +120,19 @@ export default {
   height: 100vh; /* Full viewport height */
   width: 100vw; /* Full viewport width */
   display: flex;
-  overflow: hidden; /* Prevents horizontal scroll */
+  overflow: auto; /* Enable scrolling */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+/* Hide scrollbar for WebKit-based browsers (Chrome, Safari) */
+.container::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Show scrollbar on scroll for WebKit-based browsers (Chrome, Safari) */
+.container:hover::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
 .drawer-toggle {
@@ -157,6 +172,7 @@ export default {
 .title {
   margin: 0;
   font-size: 24px;
+  text-align: start;
 }
 
 .topbar-right {
@@ -178,7 +194,7 @@ export default {
 
 .search-icon {
   position: absolute;
-  left: 10px;
+  left: 190px;
   top: 50%;
   transform: translateY(-50%);
   color: #3f3838;
@@ -204,6 +220,19 @@ export default {
   color: #ecf0f1;
   z-index: 999;
   overflow-y: auto; /* Enable scrolling if content exceeds sidebar height */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+
+/* Hide scrollbar for WebKit-based browsers (Chrome, Safari) */
+.sidebar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Show scrollbar on scroll for WebKit-based browsers (Chrome, Safari) */
+.sidebar:hover::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
 .sidebar.is-open {
@@ -252,14 +281,32 @@ i {
 .main-content {
   margin-top: 90px; /* Height of the topbar */
   margin-left: 0;
-  transition: margin-left 0.3s ease;
-  height: 100%; /* Fill entire height */
-  width: 100%; /* Fill entire width */
-  overflow-y: auto; /* Enable scrolling if content overflows */
+  padding: 20px;
+  width: calc(100% - 160px); /* Adjust based on sidebar width */
+  transition: margin-left 0.3s ease, width 0.3s ease;
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+}
+
+/* Hide scrollbar for WebKit-based browsers (Chrome, Safari) */
+.main-content::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Show scrollbar on scroll for WebKit-based browsers (Chrome, Safari) */
+.main-content:hover::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
 .main-content.drawer-open {
   margin-left: 160px; /* Adjust for sidebar width */
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+  height: 100%; /* Fill entire height */
+  width: 100%; /* Fill entire width */
+  overflow-y: auto; /* Enable scrolling if content overflows */
 }
 
 .v-content {
@@ -271,323 +318,65 @@ i {
   flex: 1 0 auto;
 }
 
+.main-content.drawer-open {
+  margin-left: 160px; /* Adjust for sidebar width */
+  width: calc(100% - 160px); /* Adjust based on sidebar width */
+}
+
 .v-content.drawer-open {
   padding-left: 420px; /* Adjust for expanded sidebar width + margin */
 }
 
 .v-content__wrap {
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-grow: 1; /* Ensure content takes full width */
+}
+/* .v-content__wrap {
+  -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    max-width: 100%;
+    position: relative;
+} */
+
+.v-content__wrap .container--fluid {
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .container-fluid {
+  max-width: 100%;
+}
+
+.card {
+  flex: 1; /* Allow cards to grow and shrink as needed */
+  max-width: 300px; /* Limit the maximum width of a card */
+  margin: 10px; /* Add margin between cards */
   padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.05); /* Slightly enlarge the card on hover */
+}
+
+@media (min-width: 960px) {
+    .container {
+        max-width: 900px;
+    }
+}
+
+.row {
+  display: flex;
+  justify-content: center; /* Center the row contents */
 }
 </style>
-
-
-
-
-<!-- <template>
-  <div>
-    TopBar
-    <header class="topbar">
-      <div class="topbar-left">
-        <h2>Inventory System</h2>
-      </div>
-      <div class="topbar-right">
-        <div class="search-container">
-          <i class="fas fa-search search-icon" @click="focusSearchInput"></i>
-          <input type="text" class="search-input" placeholder="Search" ref="searchInput">
-        </div>
-        <router-link to="/notifications">
-          <i class="fas fa-bell"></i>
-        </router-link>
-        <router-link to="/settings">
-          <i class="fas fa-cog"></i>
-        </router-link>
-        <router-link to="/profile">
-          <i class="fas fa-user-circle"></i>
-        </router-link>
-      </div>
-    </header>
-
-    Sidebar
-    <nav class="sidebar">
-      <div class="logo-container">
-        <img src="@/assets/images/logo.png" alt="Logo" class="logo" />
-      </div>
-      <ul>
-      <li class="nav-item">
-          <router-link to="/products" class="nav-link">
-          <i class="fas fa-box-open"></i>
-          <span>Products</span>
-          </router-link>
-      </li>
-      <li class="nav-item">
-          <router-link to="/sales" class="nav-link">
-          <i class="fas fa-chart-line"></i>
-          <span>Orders</span>
-          </router-link>
-      </li>
-      <li class="nav-item">
-          <router-link to="/purchases" class="nav-link">
-          <i class="fas fa-shopping-cart"></i>
-          <span>Updates</span>
-          </router-link>
-      </li>
-      </ul>
-    </nav>
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'SidebarTopBar',
-  methods: {
-    focusSearchInput() {
-      this.$refs.searchInput.focus();
-    }
-  }
-};
-</script>
-
-<style scoped>
-/* TopBar styles */
-.topbar {
-  height: 90px;
-  background-color: #496a8b;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  color: #ecf0f1;
-  position: fixed;
-  top: 0;
-  left: 160px; /* Adjust for sidebar width */
-  right: 0;
-  z-index: 1000;
-}
-
-.topbar-left h2 {
-  margin: 0;
-  font-size: 24px;
-}
-
-.topbar-right {
-  display: flex;
-  align-items: center;
-}
-
-.search-container {
-  position: relative;
-  margin-right: 20px;
-}
-
-.search-input {
-  padding: 5px 10px 5px 30px;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-.search-icon {
-  position: absolute;
-  left: 180px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #3f3838;
-}
-
-.topbar-right i {
-  margin-left: 20px;
-  cursor: pointer;
-}
-
-/* Sidebar styles */
-.sidebar {
-  width: 160px; /* Default width */
-  height: 100vh;
-  background-color: #496a8b;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 0;
-  color: #ecf0f1;
-}
-
-.logo-container {
-  text-align: center;
-}
-
-.logo {
-  width: 120px;
-  margin-bottom: 10px;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  width: 100%;
-}
-
-.nav-item {
-  width: 100%;
-}
-
-.nav-link {
-  color: #ecf0f1;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  padding: 10px 0px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-}
-
-.nav-link:hover {
-  background-color: #34495e;
-}
-
-i {
-  margin-right: 5px;
-  color: #ec6036;
-  size: 0dvh;
-}
-
-/* Responsive styles */
-@media only screen and (max-width: 768px) {
-  .topbar {
-    left: 0;
-  }
-}
-</style> -->
-
-
-
-<!-- <template>
-  <nav class="sidebar">
-      <div class="logo-container">
-      <img src="@/assets/images/logo.png" alt="Logo" class="logo" />
-
-      </div>
-      <ul>
-      <li class="nav-item">
-          <router-link to="/dashboard" class="nav-link">
-          <i class="fas fa-tachometer-alt"></i>
-          <span>Dashboard</span>
-          </router-link>
-      </li>
-      <li class="nav-item">
-          <router-link to="/users" class="nav-link">
-          <i class="fas fa-users"></i>
-          <span>Users</span>
-          </router-link>
-      </li>
-      <li class="nav-item">
-          <router-link to="/products" class="nav-link">
-          <i class="fas fa-box-open"></i>
-          <span>Products</span>
-          </router-link>
-      </li>
-      <li class="nav-item">
-          <router-link to="/sales" class="nav-link">
-          <i class="fas fa-chart-line"></i>
-          <span>Sales</span>
-          </router-link>
-      </li>
-      <li class="nav-item">
-          <router-link to="/invoices" class="nav-link">
-          <i class="fas fa-file-invoice"></i>
-          <span>Invoices</span>
-          </router-link>
-      </li>
-      <li class="nav-item">
-          <router-link to="/reports" class="nav-link">
-          <i class="fas fa-chart-bar"></i>
-          <span>Reports</span>
-          </router-link>
-      </li>
-      <li class="nav-item">
-          <router-link to="/purchases" class="nav-link">
-          <i class="fas fa-shopping-cart"></i>
-          <span>Purchases</span>
-          </router-link>
-      </li>
-      </ul>
-  </nav>
-  </template>
-
-    <! <script>
-    import TopBar from '@/components/TopBar.vue';
-
-    export default {
-      data () {
-        return {
-        };
-      },
-
-      components: {
-            TopBar
-          },
-        }; -->
-<!--  -->
-
-  <!-- <style scoped>
-  .sidebar {
-  width: 160px;
-  height: 100vh;
-  background-color: #496a8b;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 0;
-  color: #ecf0f1;
-  }
-
-  .logo-container {
-  text-align: center;
-  }
-
-  .logo {
-  width: 120px;
-  margin-bottom: 10px;
-  }
-
-  ul {
-  list-style: none;
-  padding: 0;
-  width: 100%;
-  }
-
-  li {
-  width: 100%;
-  }
-
-  a {
-  color: #ecf0f1;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  padding: 10px 0px   ;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  }
-
-  a:hover {
-  background-color: #34495e;
-  }
-
-  i {
-  margin-right: 5px;
-  color: #ec6036;
-  size: 0dvh;
-  }
-  </style> -->

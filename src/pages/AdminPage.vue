@@ -37,37 +37,40 @@
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/products-view" class="nav-link" @click="selectCategory('users-view')">
+          <router-link to="/users-view" class="nav-link" @click="selectCategory('users-view')">
             <i class="fas fa-users"></i>
             <span>Users</span>
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/products" class="nav-link" @click="selectCategory('products-view')">
+          <router-link to="/products-view" class="nav-link" @click="selectCategory('products-view')">
             <i class="fas fa-box-open"></i>
             <span>Products</span>
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/sales" class="nav-link" @click="selectCategory('sales')">
+          <router-link to="/sales-view" class="nav-link" @click="selectCategory('sales-view')">
             <i class="fas fa-chart-line"></i>
             <span>Sales</span>
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/invoices" class="nav-link" @click="closeDrawer">
+          <router-link to="/invoices-view" class="nav-link" @click="selectCategory('invoices-view')">
+            <i class="fas fa-chart-line"></i>
             <i class="fas fa-file-invoice"></i>
             <span>Invoices</span>
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/reports" class="nav-link" @click="closeDrawer">
+          <router-link to="/reports-view" class="nav-link" @click="selectCategory('reports-view')">
+            <i class="fas fa-chart-line"></i>
             <i class="fas fa-chart-bar"></i>
             <span>Reports</span>
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/purchases" class="nav-link" @click="closeDrawer">
+          <router-link to="/purchases-view" class="nav-link" @click="selectCategory('purchases-view')">
+            <i class="fas fa-chart-line"></i>
             <i class="fas fa-shopping-cart"></i>
             <span>Purchases</span>
           </router-link>
@@ -96,6 +99,9 @@ import DashBoard from '@/components/DashBoard.vue';
 import UsersView from '@/components/UsersView.vue';
 import ProductsView from '@/components/ProductsView.vue';
 import SalesView from '@/components/SalesView.vue';
+import InvoicesView from '@/components/InvoicesView.vue';
+import ReportsView from '@/components/ReportsView.vue';
+import PurchasesView from '@/components/PurchasesView.vue';
 export default {
   name: 'SidebarTopBar',
   data() {
@@ -110,6 +116,9 @@ export default {
     UsersView,
     ProductsView,
     SalesView,
+    InvoicesView,
+    ReportsView,
+    PurchasesView,
   },
 
   computed: {
@@ -142,7 +151,19 @@ export default {
   height: 100vh; /* Full viewport height */
   width: 100vw; /* Full viewport width */
   display: flex;
-  overflow: hidden; /* Prevents horizontal scroll */
+  overflow: auto; /* Enable scrolling */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+/* Hide scrollbar for WebKit-based browsers (Chrome, Safari) */
+.container::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Show scrollbar on scroll for WebKit-based browsers (Chrome, Safari) */
+.container:hover::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
 .drawer-toggle {
@@ -230,6 +251,19 @@ export default {
   color: #ecf0f1;
   z-index: 999;
   overflow-y: auto; /* Enable scrolling if content exceeds sidebar height */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+
+/* Hide scrollbar for WebKit-based browsers (Chrome, Safari) */
+.sidebar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Show scrollbar on scroll for WebKit-based browsers (Chrome, Safari) */
+.sidebar:hover::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
 .sidebar.is-open {
@@ -275,17 +309,36 @@ i {
   color: #ec6036;
 }
 
+
 .main-content {
   margin-top: 90px; /* Height of the topbar */
+  margin-left: 0;
+  padding: 20px;
+  width: calc(100% - 250px); /* Adjust based on sidebar width */
+  transition: margin-left 0.3s ease, width 0.3s ease;
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+}
+
+/* Hide scrollbar for WebKit-based browsers (Chrome, Safari) */
+.main-content::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Show scrollbar on scroll for WebKit-based browsers (Chrome, Safari) */
+.main-content:hover::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.main-content.drawer-open {
+  margin-left: 160px; /* Adjust for sidebar width */
   margin-left: 0;
   transition: margin-left 0.3s ease;
   height: 100%; /* Fill entire height */
   width: 100%; /* Fill entire width */
   overflow-y: auto; /* Enable scrolling if content overflows */
-}
-
-.main-content.drawer-open {
-  margin-left: 160px; /* Adjust for sidebar width */
 }
 
 .v-content {
@@ -297,17 +350,28 @@ i {
   flex: 1 0 auto;
 }
 
+.main-content.drawer-open {
+  margin-left: 160px; /* Adjust for sidebar width */
+  width: calc(100% - 160px); /* Adjust based on sidebar width */
+}
+
 .v-content.drawer-open {
   padding-left: 420px; /* Adjust for expanded sidebar width + margin */
 }
 
 .v-content__wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-grow: 1; /* Ensure content takes full width */
+}
+/* .v-content__wrap {
   -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     max-width: 100%;
     position: relative;
-}
+} */
 
 .v-content__wrap .container--fluid {
     padding-left: 30px;
@@ -318,6 +382,38 @@ i {
   max-width: 100%;
 }
 
+/* Responsive Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: left;
+  border: 1px solid #dee2e6;
+}
+
+.card {
+  flex: 1; /* Allow cards to grow and shrink as needed */
+  max-width: 300px; /* Limit the maximum width of a card */
+  margin: 10px; /* Add margin between cards */
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.05); /* Slightly enlarge the card on hover */
+}
+
 @media (min-width: 960px) {
     .container {
         max-width: 900px;
@@ -325,11 +421,17 @@ i {
 }
 
 .row {
-    display: flex;
-    flex-wrap: wrap;
-    /* -webkit-box-flex: 1; */
-    margin-right: -12px;
-    margin-left: -12px;
-    /* flex: 1 1 auto; */
+  display: flex;
+  justify-content: center; /* Center the row contents */
 }
+
+/* Responsive table */
+table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  th, td {
+    white-space: nowrap;
+  }
 </style>

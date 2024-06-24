@@ -1,99 +1,151 @@
 <template>
-    <div class="card-container">
-      <div class="card" v-for="item in cardItems" :key="item.label">
-        <img :src="item.icon" :alt="item.label" class="card-icon" />
-        <div class="card-label">{{ item.label }}</div>
-      </div>
+  <div class="container">
+    <h2>Manage User</h2>
+    <div class="table-wrapper">
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>NAME</th>
+            <th>USERNAME</th>
+            <th>EMAIL</th>
+            <th>JOINED</th>
+            <th>CATEGORY</th>
+            <th>STATUS</th>
+            <th>Usetype</th>
+            <th>ACTIONS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="user in users" :key="user.username">
+            <td>{{ user.name }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.joined }}</td>
+            <td>{{ user.category }}</td>
+            <td :class="{'verified': user.status === 'verified', 'not-verified': user.status === 'not verified'}">
+              {{ user.status }}
+            </td>
+            <td>{{ user.usertype }}</td>
+            <td>
+              <button class="details-btn">Details</button>
+              <button class="delete-btn">X</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    name: 'DashboardCards',
-    data() {
-      return {
-        cardItems: [
-          { label: 'Sales Activity', icon: 'path/to/sales-activity-icon.png' },
-          { label: 'Sales Order', icon: 'path/to/sales-order-icon.png' },
-          { label: 'Purchase Order Status', icon: 'path/to/purchase-order-icon.png' },
-          { label: 'Top Selling Item', icon: 'path/to/top-selling-icon.png' },
-          { label: 'Inventory Summary', icon: 'path/to/inventory-summary-icon.png' },
-          { label: 'Product Details', icon: 'path/to/product-details-icon.png' },
-        ],
-      };
-    },
-  };
-  </script>
-  
-  <style scoped>
-  .card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
-    padding: 20px;
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'ManageUser',
+  data() {
+    return {
+      users: [
+        { name: 'Jake', username: 'Jaker23', email: 'jb@gmail.com', joined: '25-06-2024', category: 'Food', status: 'verified', usertype: 'supplier' },
+        { name: 'Mark', username: 'Mark30', email: 'mar@gmail.com', joined: '25-06-2024', category: 'Non-Food', status: 'verified', usertype: 'supplier' },// Additional user data here
+        { name: 'Mark', username: 'Mark30', email: 'mar@gmail.com', joined: '25-06-2024', category: 'Non-Food', status: 'verified', usertype: 'supplier' },
+        { name: 'Mark', username: 'Mark30', email: 'mar@gmail.com', joined: '25-06-2024', category: 'Non-Food', status: 'verified', usertype: 'supplier' },
+        { name: 'Mark', username: 'Mark30', email: 'mar@gmail.com', joined: '25-06-2024', category: 'Non-Food', status: 'verified', usertype: 'supplier' },
+        { name: 'Mark', username: 'Mark30', email: 'mar@gmail.com', joined: '25-06-2024', category: 'Non-Food', status: 'verified', usertype: 'supplier' },
+      ],
+    };
+  },
+};
+</script>
+
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.user-table th, .user-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.user-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.verified {
+  color: white;
+  background-color: blue;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.not-verified {
+  color: white;
+  background-color: red;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.details-btn {
+  background-color: #f2f2f2;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 5px;
+}
+
+.delete-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+}
+
+h2 {
+  text-align: center;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .user-table thead {
+    display: none;
   }
-  
-  .card {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    padding: 20px;
-    border: 2px solid #ff7f50;
-    border-radius: 10px;
-    text-align: center;
+
+  .user-table, .user-table tbody, .user-table tr, .user-table td {
+    display: block;
+    width: 100%;
   }
-  
-  .card-icon {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 10px;
+
+  .user-table tr {
+    margin-bottom: 15px;
   }
-  
-  .card-label {
-    font-size: 16px;
+
+  .user-table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  .user-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
     font-weight: bold;
+    text-align: left;
   }
-  @media (max-width: 768px) {
-    .card-container {
-      grid-template-columns: 1fr 1fr;
-      padding: 10px;
-      gap: 15px;
-    }
-  
-    .card {
-      padding: 15px;
-    }
-  
-    .card-icon {
-      width: 40px;
-      height: 40px;
-    }
-  
-    .card-label {
-      font-size: 14px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .card-container {
-      grid-template-columns: 1fr;
-      padding: 5px;
-      gap: 10px;
-    }
-  
-    .card {
-      padding: 10px;
-    }
-  
-    .card-icon {
-      width: 30px;
-      height: 30px;
-    }
-  
-    .card-label {
-      font-size: 12px;
-    }
-  }
-  </style>
-  
-  
+}
+</style>

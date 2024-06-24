@@ -9,7 +9,7 @@
   
   <script>
   export default {
-    name: 'DashboardCards',
+    name: 'UsersCards',
     data() {
       return {
         cardItems: [

@@ -11,6 +11,15 @@ import AdminLogin from '@/components/AdminLogin.vue';
 // import CashierDashboard from '@/views/CashierDashboard.vue';
 import DashBoard from '@/components/DashBoard.vue';
 import ProductsView from '@/components/ProductsView.vue';
+import UsersView from '@/components/UsersView.vue';
+import SalesView from '@/components/SalesView.vue';
+import InvoicesView from '@/components/InvoicesView.vue';
+import ReportsView from '@/components/ReportsView.vue';
+import PurchasesView from '@/components/PurchasesView.vue';
+import OrdersView from '@/components/OrdersView.vue';
+import CashierProducts from '@/components/CashierProducts.vue';
+import UpdatesView from '@/components/UpdatesView.vue';
+// import AddProducts from '@/components/AddProducts.vue';
 // Import the CashierPage component
 
 const routes = [
@@ -25,6 +34,12 @@ const routes = [
                     { path: '/top-bar', component: TopBar },
                     { path: '/dash-board', component: DashBoard },
                     { path: '/products-view', component: ProductsView },
+                    { path: '/users-view', component: UsersView },
+                    { path: '/sales-view', component: SalesView },
+                    { path: '/invoices-view', component: InvoicesView },
+                    { path: '/purchases-view', component: PurchasesView },
+                    { path: '/reports-view', component: ReportsView },
+                    // { path: '/add-products', component: AddProducts },
                     {
                         path: '/user-view', component: AdminLogin,
                     beforeEnter: (to, from, next) => {
@@ -39,11 +54,14 @@ const routes = [
                 ]
                 },
 
-            { path: '/cashier', component: CashierPage,
-                // children: [
-                //     { path: '', component: CashierDashboard }, // Cashier Dashboard
-                // ]
-             },
+            { path: '/cashier',
+                component: CashierPage,
+                children: [
+                    { path: '/orders-view', component: OrdersView },
+                    { path: '/cashier-products', component: CashierProducts },
+                    { path: '/updates-view', component: UpdatesView },
+                ]
+                },
             {
                 path: '/supplier',
                 component: SupplierPage,
