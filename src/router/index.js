@@ -1,75 +1,74 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomePage from '@/pages/HomePage.vue';
-import AdminPage from '@/pages/AdminPage.vue';
-import CashierPage from '@/pages/CashierPage.vue';
-import SupplierPage from '@/pages/SupplierPage.vue';
-import SupplierLogin from '@/components/SupplierLogin.vue';
-import SupplierRegister from '@/components/SupplierRegister.vue';
-import TopBar from '@/components/TopBar.vue';
-// import AdminUserView from '@/views/AdminUserView.vue';
-import AdminLogin from '@/components/AdminLogin.vue';
-// import CashierDashboard from '@/views/CashierDashboard.vue';
-import DashBoard from '@/components/DashBoard.vue';
-import ProductsView from '@/components/ProductsView.vue';
-import UsersView from '@/components/UsersView.vue';
-import SalesView from '@/components/SalesView.vue';
-import InvoicesView from '@/components/InvoicesView.vue';
-import ReportsView from '@/components/ReportsView.vue';
-import PurchasesView from '@/components/PurchasesView.vue';
-import OrdersView from '@/components/OrdersView.vue';
-import CashierProducts from '@/components/CashierProducts.vue';
-import UpdatesView from '@/components/UpdatesView.vue';
-// import AddProducts from '@/components/AddProducts.vue';
-// Import the CashierPage component
+
+// Import views and components for routing pages
+import LoginRegister from '@/views/LoginRegister.vue';
+import AdminPage from '@/views/AdminPage.vue';
+import CashierPage from '@/views/CashierPage.vue';
+import SupplierPage from '@/views/SupplierPage.vue';
+
+// Admin Views
+// import AdminSales from '@/components/admin/AdminSales.vue';
+// import AdminPurchases from '@/components/admin/AdminPurchases.vue';
+import AllSupplies from '@/components/admin/AllSupplies.vue';
+// import AdminOrders from '@/components/admin/AdminOrders.vue';
+
+// Cashier Views
+// import CashierAllSupplies from '@/components/cashier/CashierAllSupplies.vue';
+// import CashierOrders from '@/components/cashier/CashierOrders.vue';
+// import CashierSales from '@/components/cashier/CashierSales.vue';
+// import CashierPurchases from '@/components/cashier/CashierPurchases.vue';
+// import CashierUpdateOrders from '@/components/cashier/CashierUpdateOrders.vue';
+// import CashierOnSales from '@/components/ashier/cashierOnSales.vue';
+
+// Supplier Views
+// import SupplierMyProducts from '@/components/supplier/SupplierMyProducts.vue';
+// import SupplierEditProducts from '@/components/supplier/SupplierEditProducts.vue';
+// import SupplierMyOrders from '@/components/supplier/SupplierMyOrders.vue';
+// import SupplierConfirmation from '@/components/supplier/SupplierConfirmation.vue';
+// import SupplierTransactions from '@/components/supplier/SupplierTransactions.vue';
+// import SupplierMyOnSales from '@/components/supplier/SupplierMyOnSales.vue';
+
+
 
 const routes = [
 
-            { path: '/', component: HomePage },
+            { path: '/',
+            component: LoginRegister }, // Main login/register page
+
             {
 
                 path: '/admin',
                 component: AdminPage,
                 children: [
-                    // { path: '', component: AdminDashboard },
-                    { path: '/top-bar', component: TopBar },
-                    { path: '/dash-board', component: DashBoard },
-                    { path: '/products-view', component: ProductsView },
-                    { path: '/users-view', component: UsersView },
-                    { path: '/sales-view', component: SalesView },
-                    { path: '/invoices-view', component: InvoicesView },
-                    { path: '/purchases-view', component: PurchasesView },
-                    { path: '/reports-view', component: ReportsView },
-                    // { path: '/add-products', component: AddProducts },
-                    {
-                        path: '/user-view', component: AdminLogin,
-                    beforeEnter: (to, from, next) => {
-                        const token = localStorage.getItem('token');
-                        if (!token) {
-                            next('/');
-                        } else {
-                            next();
-                        }
-                        },
-                },
-                ]
+                    // { path: '/admin-sales', component: AdminSales },
+                //     { path: '/purchases', component: AdminPurchases },
+                    { path: '/all-supplies', component: AllSupplies },
+                //     { path: '/orders', component: AdminOrders },
+                  ],
                 },
 
             { path: '/cashier',
                 component: CashierPage,
-                children: [
-                    { path: '/orders-view', component: OrdersView },
-                    { path: '/cashier-products', component: CashierProducts },
-                    { path: '/updates-view', component: UpdatesView },
-                ]
+                // children: [
+                //     { path: '/all-supplies', component: CashierAllSupplies },
+                //     { path: '/orders', component: CashierOrders },
+                //     { path: '/sales', component: CashierSales },
+                //     { path: '/purchases', component: CashierPurchases },
+                //     { path: '/update-orders', component: CashierUpdateOrders },
+                //     { path: '/on-sales', component: CashierOnSales },
+                //   ],
                 },
             {
                 path: '/supplier',
                 component: SupplierPage,
-                children: [
-                    // { path: '', component: SupplierDashboard }, // Supplier Dashboard
-                    { path: 'login', component: SupplierLogin },
-                    { path: 'register', component: SupplierRegister }
-                ]
+                // children: [
+                //     { path: '/my-products', component: SupplierMyProducts },
+                //     { path: '/edit-products/:id', component: SupplierEditProducts, props: true },
+                //     { path: '/my-orders', component: SupplierMyOrders },
+                //     { path: '/confirmation/:id', component: SupplierConfirmation, props: true },
+                //     { path: '/transactions', component: SupplierTransactions },
+                //     { path: '/my-on-sales', component: SupplierMyOnSales },
+                //   ],
             },
 
 ];

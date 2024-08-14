@@ -9,6 +9,7 @@ import './assets/styles.css';
 // import vuetify from './plugins/vuetify'; // Path to vuetify export
 import 'vuetify/dist/vuetify.min.css';
 import '@mdi/font/css/materialdesignicons.css';
+// import { Bar } from 'vue-chartjs';
 // import 'chartist/dist/chartist.min.css';
 
 createApp(App).use(router).use(store).mount('#app');

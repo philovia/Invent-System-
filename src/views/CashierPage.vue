@@ -31,19 +31,37 @@
       </div>
       <ul>
         <li class="nav-item">
-          <router-link to="/orders-view" class="nav-link" @click="selectCategory('orders-view')">
+          <router-link to="/all-supplies" class="nav-link" @click="selectCategory('all-supplies')">
             <i class="fas fa-tachometer-alt"></i>
             <span>Orders</span>
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/cashier-products" class="nav-link" @click="selectCategory('cashier-products')">
+          <router-link to="/orders" class="nav-link" @click="selectCategory('orders')">
             <i class="fas fa-users"></i>
             <span>Products</span>
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/updates-view" class="nav-link" @click="selectCategory('updates-view')">
+          <router-link to="/sales" class="nav-link" @click="selectCategory('updates-view')">
+            <i class="fas fa-box-open"></i>
+            <span>Updates</span>
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/purchases" class="nav-link" @click="selectCategory('purchases')">
+            <i class="fas fa-box-open"></i>
+            <span>Updates</span>
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/update-orders" class="nav-link" @click="selectCategory('update-orders')">
+            <i class="fas fa-box-open"></i>
+            <span>Updates</span>
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/on-sales" class="nav-link" @click="selectCategory('on-sales')">
             <i class="fas fa-box-open"></i>
             <span>Updates</span>
           </router-link>
@@ -68,13 +86,13 @@
 
 <script>
 
-import OrdersView from '@/components/OrdersView.vue';
-import CashierProducts from '@/components/CashierProducts.vue';
-import UpdatesView from '@/components/UpdatesView.vue';
-// import SalesView from '@/components/SalesView.vue';
-// import InvoicesView from '@/components/InvoicesView.vue';
-// import ReportsView from '@/components/ReportsView.vue';
-// import PurchasesView from '@/components/PurchasesView.vue';
+// import CashierAllSupplies from '@/components/cashier/CashierAllSupplies.vue';
+// import CashierOrders from '@/components/cashier/CashierOrders.vue';
+// import CashierSales from '@/components/cashier/CashierSales.vue';
+// import CashierPurchases from '@/components/cashier/CashierPurchases.vue';
+// import CashierUpdateOrders from '@/components/cashier/CashierUpdateOrders.vue';
+// import CashierOnSales from '@/components/ashier/cashierOnSales.vue';
+
 export default {
   name: 'SidebarTopBar',
   data() {
@@ -84,11 +102,14 @@ export default {
     };
   },
 
-  components: {
-    OrdersView,
-    CashierProducts,
-    UpdatesView,
-  },
+  // components: {
+  //   CashierAllSupplies,
+  //   CashierOrders,
+  //   CashierSales,
+  //   CashierPurchases,
+  //   CashierUpdateOrders,
+  //   CashierOnSales,
+  // },
 
   computed: {
     currentCategoryComponent() {
